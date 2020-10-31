@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore,applyMiddleware ,combineReducers} from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk'
+import counterReducer from './counterReducer'
+import postReducer from './postReducer'
+
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  poster: postReducer
+})
+  
+
+const store = createStore(rootReducer,applyMiddleware(thunk));
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
